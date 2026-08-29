@@ -5,7 +5,7 @@ fun main() {
     //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
     // to see how IntelliJ IDEA suggests fixing it.
     println("Hello, " + name + "!")
-    println("Hello World")
+    println("Hellow World")
     println("-------------------------------------------")
     println("Welcome to our new Tenant Management System")
     println("-------------------------------------------")
