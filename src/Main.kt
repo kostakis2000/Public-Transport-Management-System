@@ -174,4 +174,34 @@ fun viewPassengerBookings(bookings: MutableList<Booking>, currency: String) {
 // TODO: implement in a later commit
 }
 
+// ==========================================================
+// Function: Check how many seats remain on a chosen route
+// TODO (Lysa Munjogu): implement seat availability check
+// ==========================================================
+fun checkSeatAvailability(
+    routes: List<Route>,
+    seatAvailability: MutableMap<Int, MutableList<Int>>
+) {
+    // TODO: implement in a later commit
+}
 
+// ==========================================================
+// Function: Book a ticket for a passenger
+// TODO (Ndirangu Sasha): implement ticket booking
+// ==========================================================
+fun bookTicket(
+    routes: List<Route>,
+    seatAvailability: MutableMap<Int, MutableList<Int>>,
+    bookings: MutableList<Booking>,
+    currency: String
+) {
+    // TODO: implement in a later commit
+}
+
+// ==========================================================
+// Function: View all bookings made by a specific passenger
+// TODO (Kamau Mary): implement passenger booking history
+// ==========================================================
+fun viewPassengerBookings(bookings: MutableList<Booking>, currency: String) {
+    // TODO: implement in a later commit
+}
