@@ -1,4 +1,3 @@
-
 // Concept Note: https://docs.google.com/document/d/1SUtXPpcE_LUKfALtgBYfUFOllP6TEvdV/edit?usp=sharing&ouid=111873841346791276279&rtpof=true&sd=true
 // Group 11
 // 150574 Oladaro Kostakis Saruni
@@ -49,9 +48,82 @@ data class Booking(
     val fare: Double
 )
 
+// ==========================================================
+// main(): menu loop, constants and collections setup
+// Contributed by: Tyron Odhiambo (151115)
+// ==========================================================
 fun main() {
-    println("Public Transport Management System")
-    println("Project scaffold created. Menu and features coming in the next commits.")
+
+    // ---------- Constants (fixed values that never change) ----------
+    val SYSTEM_NAME = "CITY LINK PUBLIC TRANSPORT SYSTEM"
+    val CURRENCY = "KES"
+
+    // ---------- Collection: list of available routes (buses) ----------
+    val routes: List<Route> = listOf(
+        Route(1, "Route 1", "Nairobi CBD - Rongai", 100.0, 5),
+        Route(2, "Route 2", "Nairobi CBD - Kikuyu", 80.0, 5),
+        Route(3, "Route 3", "Nairobi CBD - Thika", 150.0, 5),
+        Route(4, "Route 4", "Nairobi CBD - Ngong", 90.0, 5)
+    )
+
+    // ---------- Collection: seat availability per route ----------
+    // Map: routeId -> mutable list of available seat numbers
+    val seatAvailability: MutableMap<Int, MutableList<Int>> = mutableMapOf()
+    for (route in routes) {
+        val seats = mutableListOf<Int>()
+        for (seatNumber in 1..route.totalSeats) {
+            seats.add(seatNumber)
+        }
+        seatAvailability[route.id] = seats
+    }
+
+    // ---------- Collection: all bookings made during this session ----------
+    val bookings: MutableList<Booking> = mutableListOf()
+
+    // ---------- Variable to control the main menu loop ----------
+    var isRunning = true
+
+    println("=".repeat(50))
+    println(" $SYSTEM_NAME")
+    println("=".repeat(50))
+    println("Welcome! This system lets you view routes, check")
+    println("seat availability, and book bus tickets.")
+
+    // ---------- Main program loop ----------
+    while (isRunning) {
+        println("\n----------------------------------------")
+        println("MAIN MENU")
+        println("----------------------------------------")
+        println("1. View available routes")
+        println("2. Check seat availability")
+        println("3. Book a ticket")
+        println("4. View passenger bookings")
+        println("5. Exit")
+        print("Please select an option (1-5): ")
+
+        val choice = readLine()?.trim()
+
+        // ---------- Conditional statement: when ----------
+        when (choice) {
+            "1" -> displayRoutes(routes)
+
+            "2" -> checkSeatAvailability(routes, seatAvailability)
+
+            "3" -> bookTicket(routes, seatAvailability, bookings, CURRENCY)
+
+            "4" -> viewPassengerBookings(bookings, CURRENCY)
+
+            "5" -> {
+                isRunning = false
+                println("\nThank you for using $SYSTEM_NAME. Safe travels!")
+            }
+
+            else -> {
+                // ---------- Conditional statement: if/else ----------
+                println("Invalid option. Please enter a number between 1 and 5.")
+            }
+        }
+    }
 }
 
 // ==========================================================
@@ -93,5 +165,3 @@ fun bookTicket(
 fun viewPassengerBookings(bookings: MutableList<Booking>, currency: String) {
     // TODO: implement in a later commit
 }
-
-
