@@ -144,45 +144,45 @@ fun displayRoutes(routes: List<Route>) {
 
 // ==========================================================
 // Function: Check how many seats remain on a chosen route
-// TODO (Lysa Munjogu): implement seat availability check
+// Demonstrates: input, if/else validation, collections
+// Contributed by: Lysa Munjogu (190373)
 // ==========================================================
 fun checkSeatAvailability(
     routes: List<Route>,
     seatAvailability: MutableMap<Int, MutableList<Int>>
 ) {
-    // TODO: implement in a later commit
-}
+    displayRoutes(routes)
+    print("\nEnter the Route number to check seat availability: ")
+    val input = readLine()?.trim()
+    val routeId = input?.toIntOrNull()
 
-// ==========================================================
-// Function: Book a ticket for a passenger
-// TODO (Ndirangu Sasha): implement ticket booking
-// ==========================================================
-fun bookTicket(
-    routes: List<Route>,
-    seatAvailability: MutableMap<Int, MutableList<Int>>,
-    bookings: MutableList<Booking>,
-    currency: String
-) {
-    // TODO: implement in a later commit
-}
+    // Validate the route exists using a conditional statement
+    val selectedRoute = routes.find { it.id == routeId }
 
-// ==========================================================
-// Function: View all bookings made by a specific passenger
-// TODO (Kamau Mary): implement passenger booking history
-// ==========================================================
-fun viewPassengerBookings(bookings: MutableList<Booking>, currency: String) {
-// TODO: implement in a later commit
-}
+    if (selectedRoute == null) {
+        println("Invalid route selected. Please try again.")
+        return
+    }
 
-// ==========================================================
-// Function: Check how many seats remain on a chosen route
-// TODO (Lysa Munjogu): implement seat availability check
-// ==========================================================
-fun checkSeatAvailability(
-    routes: List<Route>,
-    seatAvailability: MutableMap<Int, MutableList<Int>>
-) {
-    // TODO: implement in a later commit
+    val availableSeats = seatAvailability[selectedRoute.id] ?: mutableListOf()
+    val seatsLeft: Int = availableSeats.size
+
+    println("\n----------------------------------------")
+    println("SEAT AVAILABILITY - ${selectedRoute.name}")
+    println("----------------------------------------")
+    println("Destination: ${selectedRoute.destination}")
+    println("Seats remaining: $seatsLeft out of ${selectedRoute.totalSeats}")
+
+    // Conditional to give the user a helpful status message
+    if (seatsLeft == 0) {
+        println("Status: FULLY BOOKED. No seats available.")
+    } else if (seatsLeft <= 2) {
+        println("Status: ALMOST FULL. Book soon!")
+    } else {
+        println("Status: Seats available.")
+    }
+    println("Available seat numbers: $availableSeats")
+    println("----------------------------------------")
 }
 
 // ==========================================================
