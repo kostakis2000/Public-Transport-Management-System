@@ -128,10 +128,50 @@ fun main() {
 
 // ==========================================================
 // Function: Display all available routes
-// TODO (Tonny Oirere): implement route listing
+// Demonstrates: for loop, string formatting, output
+// Contributed by: Tonny Oirere (150917)
 // ==========================================================
 fun displayRoutes(routes: List<Route>) {
+    println("\n----------------------------------------")
+    println("AVAILABLE ROUTES")
+    println("----------------------------------------")
+    for (route in routes) {
+        println("${route.id}. ${route.name} (${route.destination})")
+        println("   Fare: KES ${route.fare} | Total Seats: ${route.totalSeats}")
+    }
+    println("----------------------------------------")
+}
+
+// ==========================================================
+// Function: Check how many seats remain on a chosen route
+// TODO (Lysa Munjogu): implement seat availability check
+// ==========================================================
+fun checkSeatAvailability(
+    routes: List<Route>,
+    seatAvailability: MutableMap<Int, MutableList<Int>>
+) {
     // TODO: implement in a later commit
+}
+
+// ==========================================================
+// Function: Book a ticket for a passenger
+// TODO (Ndirangu Sasha): implement ticket booking
+// ==========================================================
+fun bookTicket(
+    routes: List<Route>,
+    seatAvailability: MutableMap<Int, MutableList<Int>>,
+    bookings: MutableList<Booking>,
+    currency: String
+) {
+    // TODO: implement in a later commit
+}
+
+// ==========================================================
+// Function: View all bookings made by a specific passenger
+// TODO (Kamau Mary): implement passenger booking history
+// ==========================================================
+fun viewPassengerBookings(bookings: MutableList<Booking>, currency: String) {
+// TODO: implement in a later commit
 }
 
 // ==========================================================
