@@ -187,7 +187,8 @@ fun checkSeatAvailability(
 
 // ==========================================================
 // Function: Book a ticket for a passenger
-// TODO (Ndirangu Sasha): implement ticket booking
+// Demonstrates: variables, input/output, conditionals, collections
+// Contributed by: Ndirangu Sasha (168827)
 // ==========================================================
 fun bookTicket(
     routes: List<Route>,
@@ -195,13 +196,100 @@ fun bookTicket(
     bookings: MutableList<Booking>,
     currency: String
 ) {
-    // TODO: implement in a later commit
+    println("\n----------------------------------------")
+    println(" TICKET BOOKING")
+    println("----------------------------------------")
+
+    print("Please enter your name: ")
+    val passengerName: String = readLine()?.trim() ?: ""
+
+    if (passengerName.isEmpty()) {
+        println("Name cannot be empty. Booking cancelled.")
+        return
+    }
+
+    displayRoutes(routes)
+    print("\nEnter the Route number you want to travel on: ")
+    val routeId = readLine()?.trim()?.toIntOrNull()
+    val selectedRoute = routes.find { it.id == routeId }
+
+    if (selectedRoute == null) {
+        println("Invalid route selected. Booking cancelled.")
+        return
+    }
+
+    val availableSeats = seatAvailability[selectedRoute.id]
+
+    // Conditional: check if any seats remain before proceeding
+    if (availableSeats == null || availableSeats.isEmpty()) {
+        println("Sorry, ${selectedRoute.name} is fully booked. No seats available.")
+        return
+    }
+
+    println("Available seats on ${selectedRoute.name}: $availableSeats")
+    print("Enter the seat number you would like to book: ")
+    val seatNumber = readLine()?.trim()?.toIntOrNull()
+
+    // Validate the chosen seat is actually available
+    if (seatNumber == null || !availableSeats.contains(seatNumber)) {
+        println("Invalid or unavailable seat number. Booking cancelled.")
+        return
+    }
+
+    // Fare is a Double data type
+    val fare: Double = selectedRoute.fare
+
+    println("\nProcessing your booking...")
+
+    // Remove the seat from the available list (collection update)
+    availableSeats.remove(seatNumber)
+
+    // Create and store the booking (collection update)
+    val newBooking = Booking(passengerName, selectedRoute.name, seatNumber, fare)
+    bookings.add(newBooking)
+
+    println("----------------------------------------")
+    println("BOOKING CONFIRMED")
+    println("----------------------------------------")
+    println("Passenger: $passengerName")
+    println("Route: ${selectedRoute.name} (${selectedRoute.destination})")
+    println("Seat Number: $seatNumber")
+    println("Fare: $currency ${fare}")
+    println("----------------------------------------")
 }
 
 // ==========================================================
 // Function: View all bookings made by a specific passenger
-// TODO (Kamau Mary): implement passenger booking history
+// Demonstrates: input, loops, conditionals, collections
+// Contributed by: Kamau Mary (191854)
 // ==========================================================
 fun viewPassengerBookings(bookings: MutableList<Booking>, currency: String) {
-    // TODO: implement in a later commit
+    print("\nEnter your name to view your bookings: ")
+    val name = readLine()?.trim() ?: ""
+
+    // Filter the bookings collection for this passenger
+    val passengerBookings = bookings.filter { it.passengerName.equals(name, ignoreCase = true) }
+
+    println("\n----------------------------------------")
+    println("BOOKINGS FOR: $name")
+    println("----------------------------------------")
+
+    if (passengerBookings.isEmpty()) {
+        println("No bookings found for this passenger.")
+    } else {
+        var totalFare = 0.0
+        var counter = 1
+
+        // Loop through the passenger's bookings
+        for (booking in passengerBookings) {
+            println("$counter. Route: ${booking.routeName} | Seat: ${booking.seatNumber} | Fare: $currency ${booking.fare}")
+            totalFare += booking.fare
+            counter++
+        }
+
+        println("----------------------------------------")
+        println("Total trips: ${passengerBookings.size}")
+        println("Total amount paid: $currency $totalFare")
+    }
+    println("----------------------------------------")
 }
