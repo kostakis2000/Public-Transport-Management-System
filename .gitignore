@@ -30,3 +30,13 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+*.iml
+.gradle
+/local.properties
+/.idea
+**/build/
+/captures
+.externalNativeBuild
+.cxx
+*.jks
+*.keystore
